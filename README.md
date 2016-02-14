@@ -52,9 +52,9 @@ integer.valid? #=> true
 
 Since the classes derive from SimpleDelegator you may use them as the
  traditional datatypes they are as in
- 
+
  ```ruby
- Wrappers::Integer('1') + 1 #=> 2
+ Wrappers::Integer.new('1') + 1 #=> 2
  ```
 
 ## Development
@@ -65,4 +65,4 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/wrappers.
+Bug reports and pull requests are welcome on GitHub at https://github.com/anmuel/wrappers.
