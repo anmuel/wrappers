@@ -16,4 +16,24 @@ describe Wrappers::Cidr do
       expect(described_class.try_convert(false)).to be_nil
     end
   end
+
+  describe '.default_route?' do
+    it 'returns true if the subnet prefix is 0' do
+      expect(described_class.default_route?('0.0.0.0/0')).to be true
+    end
+
+    it 'returns false for any other case' do
+      expect(described_class.default_route?('1.1.1.1/24')).to be false
+    end
+  end
+
+  describe '#default_route?' do
+    it 'returns true if the subnet prefix of the internal value is 0' do
+      expect(described_class.new('0.0.0.0/0')).to be_default_route
+    end
+
+    it 'returns false for any other case' do
+      expect(described_class.new('1.1.1.1/24')).to_not be_default_route
+    end
+  end
 end
