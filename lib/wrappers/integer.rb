@@ -3,11 +3,10 @@ module Wrappers
     validates_numericality_of :value, only_integer: true
 
     def convert
-      i = original_value.to_s
-      if original_value && /\A\d+\z/.match(i)
-        i.to_i
-      else
-        logger.debug("Could not convert #{original_value} to an Integer")
+      begin
+        ::Kernel::Integer(original_value)
+      rescue ArgumentError, TypeError => e
+        logger.debug(e.message)
         nil
       end
     end
