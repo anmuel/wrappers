@@ -32,6 +32,12 @@ describe Wrappers::Boolean do
     it 'returns false for any other case' do
       expect(described_class.new(0)).to_not be_valid
     end
+
+    it 'adds a not_a_boolean error code to value' do
+      bool = described_class.new('invalid')
+      expect(bool).to be_invalid
+      expect(bool.errors[:value].join).to include 'not_a_boolean'
+    end
   end
 
   describe '#true?' do
