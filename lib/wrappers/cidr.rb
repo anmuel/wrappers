@@ -1,4 +1,6 @@
 module Wrappers
+  ##
+  # Convenience Wrapper for CIDR (1.1.1.0/24) and IP (1.1.1.1) strings
   class Cidr < Wrapper
     validate :valid_cidr?
 
@@ -7,15 +9,13 @@ module Wrappers
     end
 
     def convert
-      begin
-        cidr = NetAddr::CIDR.create(original_value)
-        @valid = true
-        cidr
-      rescue ArgumentError, NetAddr::ValidationError => e
-        logger.debug(e.message)
-        @valid = false
-        nil
-      end
+      cidr = NetAddr::CIDR.create(original_value)
+      @valid = true
+      cidr
+    rescue ArgumentError, NetAddr::ValidationError => e
+      logger.debug(e.message)
+      @valid = false
+      nil
     end
 
     def default_route?

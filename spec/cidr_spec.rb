@@ -54,7 +54,7 @@ describe Wrappers::Cidr do
         '-1',
         '0',
         '1',
-        2**128+1]
+        2**128 + 1]
       invalid_example_data.each do |example|
         it "is false for #{example}" do
           expect(described_class.new(example)).to be_invalid
